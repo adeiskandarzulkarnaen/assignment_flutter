@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pertemuan_v/configs/app_routes.dart';
 import 'package:pertemuan_v/models/user.dart';
+import 'package:pertemuan_v/models/news.dart';
 import 'package:pertemuan_v/modules/home_screen/fragments/home_fragment/home_fragment.dart';
 import 'package:pertemuan_v/modules/home_screen/fragments/menu_fragment/menu_fragment.dart';
 import 'package:pertemuan_v/modules/home_screen/fragments/news_fragment/news_fragment.dart';
+
+/* data dummy */
+import 'package:pertemuan_v/models/news_dummy.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
@@ -23,6 +27,10 @@ class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   final PageController _pageController = PageController();
   late User user;
+
+  // todo: define hotesNews && List<News> latesNews
+  late News hotesNews = hotesNewsDummy;
+  late List<News> latesNews = latesNewsDummy;
 
   tapBottomItem(int index) {
     if (index != 2) {
@@ -62,7 +70,9 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           HomeFragment(
             user: user,
-            homeScaffold: scaffoldKey,
+            hotesNews: hotesNews, // todo: add hotesNews 
+            latesNews: latesNews,  // todo: add latesNews 
+            homeScaffold: scaffoldKey, 
           ),
           const NewsFragment(),
           const MenuFragment()

@@ -1,0 +1,93 @@
+import './news.dart';
+
+News hotesNewsDummy = News(
+  id: 'hotes-001', 
+  date: '08-04-2023', 
+  imageUrl: 'https://picsum.photos/1080/690', 
+  title: 'ini Judul berita terbaru',
+  desc: 'ini deskripsi berita',
+  content: 'isi berita', 
+);
+
+List<News> latesNewsDummy = [
+  News(
+    id: 'lates-002', 
+    date: '01-04-2023', 
+    imageUrl: 'https://picsum.photos/200', 
+    title: 'judul berita',
+    desc: 'ini deskripsi berita', 
+    content: 'isi berita', 
+  ),
+  News(
+    id: 'lates-002', 
+    date: '02-04-2023', 
+    imageUrl: 'https://picsum.photos/200', 
+    title: 'judul berita',
+    desc: 'ini deskripsi berita', 
+    content: 'isi berita', 
+  ),
+  News(
+    id: 'lates-003', 
+    date: '02-04-2023', 
+    imageUrl: 'https://picsum.photos/200', 
+    title: 'judul berita',
+    desc: 'ini deskripsi berita',
+    content: 'isi berita', 
+  ),
+  News(
+    id: 'lates-004', 
+    date: '02-04-2023', 
+    imageUrl: 'https://picsum.photos/200', 
+    title: 'judul berita',
+    desc: 'ini deskripsi berita',
+    content: 'isi berita', 
+  ),
+  News(
+    id: 'lates-005', 
+    date: '02-04-2023', 
+    imageUrl: 'https://picsum.photos/200', 
+    title: 'judul berita',
+    desc: 'ini deskripsi berita',
+    content: 'isi berita', 
+  ),
+  News(
+    id: 'lates-006', 
+    date: '02-04-2023', 
+    imageUrl: 'https://picsum.photos/200', 
+    title: 'judul berita',
+    desc: 'ini deskripsi berita',
+    content: 'isi berita', 
+  ),
+  News(
+    id: 'lates-007', 
+    date: '02-04-2023', 
+    imageUrl: 'https://picsum.photos/200', 
+    title: 'judul berita',
+    desc: 'ini deskripsi berita',
+    content: 'isi berita', 
+  ),
+  News(
+    id: 'lates-008', 
+    date: '02-04-2023', 
+    imageUrl: 'https://picsum.photos/200', 
+    title: 'judul berita',
+    desc: 'ini deskripsi berita',
+    content: 'isi berita', 
+  ),
+  News(
+    id: 'lates-009', 
+    date: '02-04-2023', 
+    imageUrl: 'https://picsum.photos/200', 
+    title: 'judul berita',
+    desc: 'ini deskripsi berita',
+    content: 'isi berita', 
+  ),
+  News(
+    id: 'lates-010', 
+    date: '02-04-2023', 
+    imageUrl: 'https://picsum.photos/200', 
+    title: 'judul berita',
+    desc: 'ini deskripsi berita',
+    content: 'isi berita', 
+  ),
+];

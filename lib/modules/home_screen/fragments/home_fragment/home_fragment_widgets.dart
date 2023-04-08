@@ -3,12 +3,11 @@ import 'package:go_router/go_router.dart';
 import 'package:pertemuan_v/configs/app_routes.dart';
 
 import '../../../../models/user.dart';
+import '../../../../models/news.dart'; // todo: import News model
+import '../../../../models/news_dummy.dart'; // todo: import data dummy
 
 class HomeFragmentWidget {
-  static header({
-    required User user,
-    required GlobalKey<ScaffoldState> homeScaffoldState,
-  }) {
+  static header({ required User user, required GlobalKey<ScaffoldState> homeScaffoldState }) {
     return HeaderWidget(
       user: user,
       homeScaffoldState: homeScaffoldState,
@@ -23,11 +22,7 @@ class HomeFragmentWidget {
     return SectionTitle(label: label);
   }
 
-  static hotestNewsCard(
-    Size size,
-    String pictureUrl,
-    String newsTitle,
-  ) {
+  static hotestNewsCard(Size size, String pictureUrl, String newsTitle ) {
     return HotestNewsCard(
       size: size,
       pictureUrl: pictureUrl,
@@ -35,12 +30,18 @@ class HomeFragmentWidget {
     );
   }
 
-  static latestNewsCard(Size size, int i) {
-    return LatestNewsCard(size: size, i: i);
+  static latestNewsCard(Size size, int newsIndex) {
+    return LatestNewsCard(
+      size: size, 
+      newsIndex: newsIndex
+    );
   }
 
-  static latestNewsSection(Size size) {
-    return LatestNewsSection(size: size);
+  static latestNewsSection(Size size, List<News> latesNews) { //todo
+    return LatestNewsSection(
+      size: size, 
+      latesNews: latesNews, //todo
+    );
   }
 }
 
@@ -203,14 +204,16 @@ class LatestNewsCard extends StatelessWidget {
   const LatestNewsCard({
     super.key,
     required this.size,
-    required this.i,
+    required this.newsIndex, // todo: modify to news
   });
 
   final Size size;
-  final int i;
+  final int newsIndex; // todo: define news
 
   @override
   Widget build(BuildContext context) {
+    // todo: define news
+    News news = latesNewsDummy[newsIndex];
     return Column(
       children: [
         Container(
@@ -231,7 +234,7 @@ class LatestNewsCard extends StatelessWidget {
               GoRouter.of(context).goNamed(
                 AppRoutes.newsDetail,
                 params: {
-                  "id": i.toString(),
+                  "id": newsIndex.toString(), // todo: add newsIndex
                 },
               );
             },
@@ -247,7 +250,7 @@ class LatestNewsCard extends StatelessWidget {
                     child: AspectRatio(
                       aspectRatio: 1 / 1,
                       child: Image.network(
-                        "https://picsum.photos/200",
+                        news.imageUrl, // todo: add newsIndex
                       ),
                     ),
                   ),
@@ -256,7 +259,8 @@ class LatestNewsCard extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      "${i + 1}. Laboris fugiat eiusmod consequat aliqua eiusmod.",
+                      '${news.title}\n${news.desc}',
+                      textAlign: TextAlign.start,
                     ),
                   ),
                 ),
@@ -272,23 +276,27 @@ class LatestNewsCard extends StatelessWidget {
   }
 }
 
+// todo: add latesNews
 class LatestNewsSection extends StatelessWidget {
   const LatestNewsSection({
     super.key,
     required this.size,
+    required this.latesNews,
   });
 
+  // todo: define latesNews
   final Size size;
+  final List<News> latesNews;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < latesNews.length; i++)
           LatestNewsCard(
             size: size,
-            i: i,
+            newsIndex: i,
           ),
       ],
     );
