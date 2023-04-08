@@ -14,20 +14,23 @@ class ProfileDetailScreen extends StatefulWidget {
 }
 
 class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();  /* ? */
-  TextEditingController nameController = TextEditingController(); /* ? */
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  bool isVisiblePassword = false;
 
   @override
   void initState() {
     if (widget.user.name != "") {
-      nameController.text = widget.user.name;
+      _nameController.text = widget.user.name;
     }
     super.initState();
   }
 
   @override
   void dispose() {
-    nameController.dispose();
+    _nameController.dispose();
+    _passwordController.dispose();
     super.dispose();
   }
 
@@ -79,9 +82,8 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: TextFormField(
-                        controller: nameController,
+                        controller: _nameController,
                         decoration: InputDecoration(
-                          isDense: true,
                           label: const Text("Name"),
                           hintText: "Masukan nama anda",
                           border: OutlineInputBorder(
@@ -102,24 +104,35 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: TextFormField(
-                        // controller: usernameController,
+                        controller: _passwordController,
+                        obscureText: !isVisiblePassword,
                         decoration: InputDecoration(
                           isDense: true,
-                          label: const Text("Username"),
-                          hintText: "Masukan username anda",
+                          label: const Text("Password"),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8)
+                          ),
+                          suffixIcon: IconButton(
+                            onPressed: (){
+                              setState(() {
+                                isVisiblePassword = !isVisiblePassword;
+                              });
+                            }, 
+                            icon: Icon(
+                              isVisiblePassword == false 
+                                ? Icons.visibility_rounded
+                                : Icons.visibility_off_rounded
+                            ),
                           )
                         ),
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return "Username wajib di isi";
+                            return "Password wajib di isi";
                           }
                           return null;
                         },
                       ),
                     ),
-
                   ],
                 ),
               ),
@@ -130,7 +143,16 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
             child: GestureDetector(
               onTap: () {
                 if (_formKey.currentState!.validate()) {
-                  log("simpan");
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Column(
+                        children: const [
+                          Text("Success"),
+                          Text("Anda berhasil mengubah data diri")
+                        ],
+                      )
+                    )
+                  );
                 } else {
                   log("gagal simpan");
                 }
