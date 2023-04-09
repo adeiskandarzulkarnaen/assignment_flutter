@@ -17,12 +17,28 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _usernmeController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _profilePhotoController = TextEditingController();
+  final TextEditingController _phoneNumberController = TextEditingController();
   bool isVisiblePassword = false;
 
   @override
   void initState() {
     if (widget.user.name != "") {
       _nameController.text = widget.user.name;
+    }
+    if (widget.user.username != "") {
+      _usernmeController.text = widget.user.username;
+    }
+    if (widget.user.email != "") {
+      _emailController.text = widget.user.email;
+    }
+    if (widget.user.profilePhoto != "") {
+      _profilePhotoController.text = widget.user.profilePhoto!;
+    }
+    if (widget.user.phoneNumber != "") {
+      _phoneNumberController.text = widget.user.phoneNumber!;
     }
     super.initState();
   }
@@ -31,6 +47,10 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
   void dispose() {
     _nameController.dispose();
     _passwordController.dispose();
+    _usernmeController.dispose();
+    _emailController.dispose();
+    _profilePhotoController.dispose();
+    _phoneNumberController.dispose();
     super.dispose();
   }
 
@@ -76,9 +96,9 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
                 key: _formKey,
                 child: Column(
                   children: [
-                    const SizedBox(
-                      height: 16,
-                    ),
+                    const SizedBox(height: 16),
+
+                    //todo: username widget
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: TextFormField(
@@ -98,9 +118,9 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
                         },
                       ),
                     ),
-                    const SizedBox(
-                      height: 16,
-                    ),
+                    const SizedBox(height: 8),
+
+                    //todo: password widget
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: TextFormField(
@@ -133,6 +153,90 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
                         },
                       ),
                     ),
+                    const SizedBox(height: 32),
+
+                    //todo: username widget
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: TextFormField(
+                        controller: _usernmeController,
+                        decoration: InputDecoration(
+                          label: const Text("username"),
+                          hintText: "masukan username anda",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8)
+                          )
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "username wajib diisi";
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+
+                    //todo: email widget
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: TextFormField(
+                        controller: _emailController,
+                        decoration: InputDecoration(
+                          label: const Text("email"),
+                          hintText: "masukan email anda",
+                          
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8)
+                          )
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "email wajib diisi";
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+
+                    //todo: profile widget
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: TextFormField(
+                        controller: _profilePhotoController,
+                        decoration: InputDecoration(
+                          label: const Text("profile photo"),
+                          hintText: "input image Url",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8)
+                          )
+                        ),
+                        validator: (value) {
+                          return null;
+                        },
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+
+                    //todo: phone number widget
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: TextFormField(
+                        controller: _phoneNumberController,
+                        decoration: InputDecoration(
+                          label: const Text("Phone Mumber"),
+                          hintText: "masukan no hp",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8)
+                          )
+                        ),
+                        validator: (value) {
+                          return null;
+                        },
+                      ),
+                    ),
+                    const SizedBox(height: 8),
                   ],
                 ),
               ),

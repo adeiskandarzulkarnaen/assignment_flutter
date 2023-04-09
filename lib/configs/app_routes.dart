@@ -6,6 +6,7 @@ import 'package:pertemuan_v/modules/splash_screen/splash_screen.dart';
 import 'package:pertemuan_v/modules/profile_detail_screen/profile_detail_screen.dart';
 
 import '../models/user.dart';
+import '../models/news.dart';
 
 class AppRoutes {
   static const String splash = "splash";
@@ -25,13 +26,12 @@ class AppRoutes {
     );
   }
 
-  static Page _newsDetailScreenBuilder(
-    BuildContext context,
-    GoRouterState state,
-  ) {
+  static Page _newsDetailScreenBuilder( BuildContext context, GoRouterState state ) {
+    final news = state.extra as News;
+
     return MaterialPage(
       child: NewsDetailScreen(
-        id: state.params["id"]!,
+        news: news,
       ),
     );
   }
@@ -64,7 +64,7 @@ class AppRoutes {
         routes: [
           GoRoute(
             name: newsDetail,
-            path: "news-detail:id",
+            path: "news-detail",
             pageBuilder: _newsDetailScreenBuilder,
           ),
           GoRoute(

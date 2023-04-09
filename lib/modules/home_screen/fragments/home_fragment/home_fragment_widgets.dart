@@ -158,14 +158,20 @@ class HotestNewsCard extends StatelessWidget {
     return Stack(
       children: [
         ClipRRect(
-          borderRadius: BorderRadius.circular(
-            16,
-          ),
-          child: AspectRatio(
-            aspectRatio: 16 / 9,
-            child: Image.network(
-              pictureUrl,
-              fit: BoxFit.cover,
+          borderRadius: BorderRadius.circular(16),
+          child: GestureDetector(
+            onTap: (){
+              GoRouter.of(context).goNamed(
+                AppRoutes.newsDetail,
+                extra: hotesNewsDummy,// todo: err
+              );
+            },
+            child: AspectRatio(
+              aspectRatio: 16 / 9,
+              child: Image.network(
+                pictureUrl,
+                fit: BoxFit.cover,
+              ),
             ),
           ),
         ),
@@ -186,12 +192,15 @@ class HotestNewsCard extends StatelessWidget {
         Positioned(
           bottom: 16,
           right: 16,
-          child: Text(
-            newsTitle,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width - 64,
+            child: Text(
+              newsTitle,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
+                fontSize: 16,
+                color: Colors.black,
+              ),
             ),
           ),
         ),
@@ -218,9 +227,7 @@ class LatestNewsCard extends StatelessWidget {
       children: [
         Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(
-              8,
-            ),
+            borderRadius: BorderRadius.circular(8),
             color: Colors.white,
             boxShadow: const [
               BoxShadow(
@@ -233,9 +240,7 @@ class LatestNewsCard extends StatelessWidget {
             onTap: () {
               GoRouter.of(context).goNamed(
                 AppRoutes.newsDetail,
-                params: {
-                  "id": newsIndex.toString(), // todo: add newsIndex
-                },
+                extra: news,// todo: add newsIndex
               );
             },
             child: Row(
@@ -251,6 +256,7 @@ class LatestNewsCard extends StatelessWidget {
                       aspectRatio: 1 / 1,
                       child: Image.network(
                         news.imageUrl, // todo: add newsIndex
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ),
@@ -259,7 +265,7 @@ class LatestNewsCard extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      '${news.title}\n${news.desc}',
+                      news.title,
                       textAlign: TextAlign.start,
                     ),
                   ),
@@ -294,10 +300,7 @@ class LatestNewsSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         for (int i = 0; i < latesNews.length; i++)
-          LatestNewsCard(
-            size: size,
-            newsIndex: i,
-          ),
+          LatestNewsCard(size: size, newsIndex: i),
       ],
     );
   }

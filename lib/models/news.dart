@@ -3,7 +3,6 @@ class News {
   final String date;
   final String imageUrl;
   final String title;
-  final String desc;
   final String content;
 
   News({
@@ -11,7 +10,6 @@ class News {
     required this.date,
     required this.imageUrl,
     required this.title,
-    required this.desc,
     required this.content,
   });
 }
