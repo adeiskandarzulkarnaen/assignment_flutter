@@ -74,7 +74,9 @@ class _HomeScreenState extends State<HomeScreen> {
             latesNews: latesNews,  // todo: add latesNews 
             homeScaffold: scaffoldKey, 
           ),
-          const NewsFragment(),
+          NewsFragment(
+            latesNews: latesNews,
+          ),
           const MenuFragment()
         ],
       ),

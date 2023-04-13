@@ -10,3 +10,7 @@ Nama: Ulpah Masripah
 <br/><br/>
 NPM : 2006013 <br/>
 Nama: Mita Hestiyanti
+
+<br/><br/>
+NPM : 2006040 <br/>
+Nama: Abdul Lathif
